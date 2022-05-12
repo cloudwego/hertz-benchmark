@@ -1,0 +1,4 @@
+[hertz_client - hertz_server],100,1024,239807.00,1.00,1.34
+[fasthttp_client - hertz_server],100,1024,230603.35,1.40,1.73
+[hertz_client - hertz_server],100,4096,205349.01,1.17,1.63
+[fasthttp_client - hertz_server],100,4096,160022.60,1.96,2.44

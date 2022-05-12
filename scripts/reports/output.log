@@ -1,0 +1,55 @@
+2022/01/04 14:33:04 debug server listen at: [::]:19001
+Info: [hertz_client - hertz_server] start benching, body size: 1024, header size: 0. concurrent: 100, total: 5000000
+Info: [hertz_client - hertz_server]: took 20850 ms for 5000000 requests
+Info: [hertz_client - hertz_server]: requests total: 5000000, failed: 0
+Info: [hertz_client - hertz_server]: TPS: 239807.00, TP99: 1.00ms, TP999: 1.34ms (b=1024 Byte, h=0 Byte, c=100, n=5000000)
+[hertz_client@Client] CPU Usage: MIN: 105.11%, TP50: 399.00%, TP90: 400.00%, TP99: 400.00%, MAX: 400.40%, AVG:360.65%
+[hertz_client@Client] Mem Usage: AVG: 117274 KB, MAX: 183740 KB
+
+
+Usage: grep [OPTION]... PATTERN [FILE]...
+Try 'grep --help' for more information.
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+taskset -c 4-19 ./output/bin/hertz_server
+server hertz running with taskset -c 4-19
+client fasthttp running with fasthttp_client
+2022/01/04 14:33:31 starting debug server
+2022/01/04 14:33:31 debug server listen at: [::]:19002
+Info: [fasthttp_client - hertz_server] start benching, body size: 1024, header size: 0. concurrent: 100, total: 5000000
+Info: [fasthttp_client - hertz_server]: took 21682 ms for 5000000 requests
+Info: [fasthttp_client - hertz_server]: requests total: 5000000, failed: 0
+Info: [fasthttp_client - hertz_server]: TPS: 230603.35, TP99: 1.40ms, TP999: 1.73ms (b=1024 Byte, h=0 Byte, c=100, n=5000000)
+[fasthttp_client@Client] CPU Usage: MIN: 105.11%, TP50: 399.40%, TP90: 400.40%, TP99: 401.00%, MAX: 401.40%, AVG:369.80%
+[fasthttp_client@Client] Mem Usage: AVG: 93226 KB, MAX: 221728 KB
+
+
+Usage: grep [OPTION]... PATTERN [FILE]...
+Try 'grep --help' for more information.
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+taskset -c 4-19 ./output/bin/hertz_server
+server hertz running with taskset -c 4-19
+client hertz running with hertz_client
+2022/01/04 14:33:58 starting debug server
+2022/01/04 14:33:58 debug server listen at: [::]:19001
+Info: [hertz_client - hertz_server] start benching, body size: 4096, header size: 0. concurrent: 100, total: 5000000
+Info: [hertz_client - hertz_server]: took 24348 ms for 5000000 requests
+Info: [hertz_client - hertz_server]: requests total: 5000000, failed: 0
+Info: [hertz_client - hertz_server]: TPS: 205349.01, TP99: 1.17ms, TP999: 1.63ms (b=4096 Byte, h=0 Byte, c=100, n=5000000)
+[hertz_client@Client] CPU Usage: MIN: 105.75%, TP50: 399.00%, TP90: 399.40%, TP99: 400.00%, MAX: 400.00%, AVG:368.90%
+[hertz_client@Client] Mem Usage: AVG: 107054 KB, MAX: 224576 KB
+
+
+Usage: grep [OPTION]... PATTERN [FILE]...
+Try 'grep --help' for more information.
+kill: usage: kill [-s sigspec | -n signum | -sigspec] pid | jobspec ... or kill -l [sigspec]
+taskset -c 4-19 ./output/bin/hertz_server
+server hertz running with taskset -c 4-19
+client fasthttp running with fasthttp_client
+2022/01/04 14:34:28 starting debug server
+2022/01/04 14:34:28 debug server listen at: [::]:19002
+Info: [fasthttp_client - hertz_server] start benching, body size: 4096, header size: 0. concurrent: 100, total: 5000000
+Info: [fasthttp_client - hertz_server]: took 31245 ms for 5000000 requests
+Info: [fasthttp_client - hertz_server]: requests total: 5000000, failed: 0
+Info: [fasthttp_client - hertz_server]: TPS: 160022.60, TP99: 1.96ms, TP999: 2.44ms (b=4096 Byte, h=0 Byte, c=100, n=5000000)
+[fasthttp_client@Client] CPU Usage: MIN: 105.86%, TP50: 399.40%, TP90: 400.40%, TP99: 400.40%, MAX: 400.40%, AVG:374.70%
+[fasthttp_client@Client] Mem Usage: AVG: 87107 KB, MAX: 221264 KB
