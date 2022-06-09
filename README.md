@@ -24,6 +24,16 @@ ports=(8000 8001 8002 8003 8004)
 ```shell
 go tool pprof localhost:{port}/debug/pprof/{pprof_type}
 ```
+
+### wrk Benchmark
+```
+./scripts/benchmark_wrk.sh
+```
+### ab Benchmark
+```
+./scripts/benchmark_ab.sh
+```
+
 ## 环境要求
 - OS: Linux
     - 默认依赖了命令 taskset, 限定 client 和 server 运行的 CPU; 如在其他系统执行, 请修改脚本。
