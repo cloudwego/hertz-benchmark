@@ -50,9 +50,9 @@ def parse(input, output):
             f.write('\n')
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
+    if len(sys.argv) > 2:
         input = sys.argv[1]
         output = sys.argv[2]
         parse(input, output)
-    # input = "/Users/zhouqiheng/go_project/cloudwego/hertz-benchmark/output/2022-06-08-22-27.log"
-    # output = "/Users/zhouqiheng/go_project/cloudwego/hertz-benchmark/scripts/wrk/output.csv"
+    else:
+        print("Please provide input and output")

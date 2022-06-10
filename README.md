@@ -25,13 +25,33 @@ ports=(8000 8001 8002 8003 8004)
 go tool pprof localhost:{port}/debug/pprof/{pprof_type}
 ```
 
-### wrk Benchmark
-```
+### [wrk Benchmark](https://github.com/wg/wrk)
+You can run `wrk benchmark` via the following commands.
+```bash
 ./scripts/benchmark_wrk.sh
+
+# parse data
+# ${input_file} locates in /output/$(date +%F-%H-%M).log
+# specify one ${output_file}
+python ./scripts/wrk/parse_data.py ${input_file} ${output_file} 
+
+# render images
+python ./scripts/reports/render_images.py ${output_file}
 ```
-### ab Benchmark
-```
+
+### [ab Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html)
+You can run `wrk benchmark` via the following commands.
+```bash
 ./scripts/benchmark_ab.sh
+
+# parse data
+# ${input_log_file} locates in /output/$(date +%F-%H-%M).log
+# ${input_latency_file} folder locates in /output/latency_$(date +%F-%H-%M)
+# specify one ${output_file}
+python ./scripts/ab/parse_data.py ${input_log_file} ${input_latency_file} ${output_file} 
+
+# render images (ab does not provide tp999)
+python ./scripts/reports/render_images.py ${output_file}
 ```
 
 ## 环境要求

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . ./scripts/env.sh
+# env for collecting data
 REPORT_PATH="output/${REPORT}.log"
 DATA_PATH="output/${REPORT}.csv"
 LATENCY_PATH="output/latency_${REPORT}"
@@ -13,7 +14,7 @@ repo=("hertz" "fasthttp" "gin" "fasthttp_timeout")
 ports=(8001 8002 8003 8004)
 serverIP="http://127.0.0.1"
 
-# . ./scripts/build_all.sh
+. ./scripts/build_all.sh
 
 # make folder to store all latency data
 if [ ! -d ${LATENCY_PATH} ]; then
@@ -44,7 +45,7 @@ for b in ${body[@]}; do
         echo "Benchmark_Config" >> ${REPORT_PATH}
         echo "${rp},${c},${b}" >> ${REPORT_PATH}
         latency_file="${LATENCY_PATH}/${rp}_${c}_${b}.csv"
-        ab -e ${latency_file} -d -S -q -n ${n} -c ${c} -k -p ./scripts/ab/request_${b}.json -T application/json ${addr}/ | $tee_cmd
+        $taskset_more ab -e ${latency_file} -d -S -q -n ${n} -c ${c} -k -p ./scripts/ab/request_${b}.json -T application/json ${addr}/ | $tee_cmd
 
         # stop server
         pid=$(ps -ef | grep ${rp}_server | grep -v grep | awk '{print $2}')
@@ -57,4 +58,4 @@ for b in ${body[@]}; do
 done
 
 # parse data and generate output.csv
-python ./scripts/ab/parse_data.py ${REPORT_PATH} ${DATA_PATH}
+python ./scripts/ab/parse_data.py ${REPORT_PATH} ${LATENCY_PATH} ${DATA_PATH}

@@ -1,6 +1,7 @@
 #!/bin/bash
 
 . ./scripts/env.sh
+# env for collecting data
 REPORT_PATH="output/${REPORT}.log"
 DATA_PATH="output/${REPORT}.csv"
 
@@ -32,7 +33,7 @@ for b in ${body[@]}; do
         # run wrk
         echo "Benchmark_Config" >> ${REPORT_PATH}
         echo "${rp},${c},${b}" >> ${REPORT_PATH}
-        wrk -d${t}s -s ./scripts/wrk/benchmark.lua -c${c} -t${c} ${addr} -- ${b} | $tee_cmd
+        $taskset_more wrk -d${t}s -s ./scripts/wrk/benchmark.lua -c${c} -t${c} ${addr} -- ${b} | $tee_cmd
 
         # stop server
         pid=$(ps -ef | grep ${rp}_server | grep -v grep | awk '{print $2}')

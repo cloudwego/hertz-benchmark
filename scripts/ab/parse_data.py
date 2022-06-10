@@ -5,7 +5,7 @@ import numpy as np
 
 CONFIG_KEY = "Benchmark_Config"
 RESULT_QPS_KEY = "Requests per second:"
-LATENCY_FILE_PATH = "./output/latency/"
+# LATENCY_FILE_PATH = "./output/latency/"
 
 def is_keyword(line, keyword):
     return keyword in line
@@ -26,9 +26,9 @@ def read_latency_file(path):
         tp99 = lines[-2].rstrip('\n').split(',')[1]
         return tp99
 
-def parse(input, output):
+def parse(log_input, latency_input, output):
     ret = []
-    with open(input, 'r') as f:
+    with open(log_input, 'r') as f:
         lines = f.readlines()
         i = 0
         while i < len(lines):
@@ -49,24 +49,24 @@ def parse(input, output):
                     qps = parse_qps(l)
                     # tp99, read from file: ${name}_${concurrency}_${body_size}.json
                     file_name = "_".join(config)+".csv"
-                    tp99 = read_latency_file(LATENCY_FILE_PATH+file_name)
+                    tp99 = read_latency_file(latency_input_path+"/"+file_name)
                     # break after parsing the result
                     break
             if len(config) == 3 and qps != "" and tp99 != "":
                 # concat the data
                 ret += [','.join(config+[qps, tp99, tp999])]
             i = j + 1
-            
+
     with open(output, 'w') as f:
         for l in ret:
             f.write(l)
             f.write('\n')
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        input = sys.argv[1]
-        output = sys.argv[2]
-
-    input = "/Users/zhouqiheng/go_project/cloudwego/hertz-benchmark/output/2022-06-09-15-40.log"
-    output = "/Users/zhouqiheng/go_project/cloudwego/hertz-benchmark/output/2022-06-09-15-40.csv"
-    parse(input, output)
+    if len(sys.argv) > 3:
+        log_input = sys.argv[1]
+        latency_input_path = sys.argv[2]
+        output = sys.argv[3]
+        parse(log_input, latency_input_path, output)
+    else:
+        print("Please provide input and output")
