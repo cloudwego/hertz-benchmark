@@ -96,7 +96,7 @@ func calcStats(bucket []Stats) Usage {
 
 func parseSmaps(data string) Stats {
 	lines := strings.Split(data, "\n")
-	reg := regexp.MustCompile("(\\w+): +(\\d+) kB")
+	reg := regexp.MustCompile(`(\w+): +(\d+) kB`)
 	stats := Stats{}
 	for _, line := range lines {
 		params := reg.FindStringSubmatch(line)

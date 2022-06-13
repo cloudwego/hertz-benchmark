@@ -119,5 +119,5 @@ func readFile(fileName string) (string, error) {
 	defer fd.Close()
 	b, err := ioutil.ReadAll(fd)
 	content := string(b)
-	return content, nil
+	return content, err
 }

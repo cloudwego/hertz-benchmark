@@ -68,7 +68,7 @@ color_dict = {
 def plot_data(title, xlabel, ylabel, x_ticks, ys):
     plt.figure(figsize=(8, 5))
     # bmh、ggplot、dark_background、fivethirtyeight 和 grayscale
-    plt.style.use('grayscale')
+    # plt.style.use('grayscale')
     plt.title(title)
 
     plt.xlabel(xlabel)

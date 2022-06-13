@@ -39,7 +39,6 @@ type Options struct {
 	Address  string
 	Body     []byte
 	PoolSize int
-	header   []byte
 }
 
 type ClientNewer func(opt *Options) Client

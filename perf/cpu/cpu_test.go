@@ -30,7 +30,7 @@ func TestRecordUsage(t *testing.T) {
 		sum := 0
 		beginAt := time.Now()
 		for {
-			if time.Now().Sub(beginAt) > defaultInterval*5 {
+			if time.Since(beginAt) > defaultInterval*5 {
 				return
 			}
 			sum += 1

@@ -6,9 +6,13 @@
 ### 同机压测
 执行前请先确认满足环境要求
 ### Server
+```bash
 ./scripts/benchmark_server.sh
+```
 ### Client
+```bash
 ./scripts/benchmark_client.sh
+```
 ### Profiling
 由于默认压测参数会比较迅速完成一次压测，为了获得更长采集时间，可以手动在 ./scripts/env.sh 中调整压测参数 n 大小。
 #### Profiling Server
@@ -24,6 +28,36 @@ ports=(8000 8001 8002 8003 8004)
 ```shell
 go tool pprof localhost:{port}/debug/pprof/{pprof_type}
 ```
+
+### [wrk Benchmark](https://github.com/wg/wrk)
+你也可以用 wrk 作为发压端，参考下面的命令。
+```bash
+./scripts/benchmark_wrk.sh
+
+# parse data
+# ${input_file} locates in /output/$(date +%F-%H-%M).log
+# specify one ${output_file}
+python ./scripts/wrk/parse_data.py ${input_file} ${output_file} 
+
+# render images
+python ./scripts/reports/render_images.py ${output_file}
+```
+
+### [ab Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html)
+你也可以用 ab 作为发压端，参考下面的命令。
+```bash
+./scripts/benchmark_ab.sh
+
+# parse data
+# ${input_log_file} locates in /output/$(date +%F-%H-%M).log
+# ${input_latency_file} folder locates in /output/latency_$(date +%F-%H-%M)
+# specify one ${output_file}
+python ./scripts/ab/parse_data.py ${input_log_file} ${input_latency_file} ${output_file} 
+
+# render images (ab does not provide tp999)
+python ./scripts/reports/render_images.py ${output_file}
+```
+
 ## 环境要求
 - OS: Linux
     - 默认依赖了命令 taskset, 限定 client 和 server 运行的 CPU; 如在其他系统执行, 请修改脚本。
