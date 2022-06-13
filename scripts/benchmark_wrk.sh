@@ -25,10 +25,8 @@ for b in ${body[@]}; do
         # server start
         
         nohup $taskset_less ./output/bin/${rp}_server >>output/log/nohup.log 2>&1 &
-        # nohup ./output/bin/${rp}_server >>output/log/nohup.log 2>&1 &
         sleep 1
         echo "server $rp running with $taskset_less"
-        # echo "server $rp"
 
         # run wrk
         echo "Benchmark_Config" >> ${REPORT_PATH}

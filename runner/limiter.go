@@ -26,7 +26,6 @@ import (
 type Limiter struct {
 	sync.Once
 	qps    int64 // 总 qps
-	now    int64
 	window time.Duration
 	limit  int64 // qps max per window
 }

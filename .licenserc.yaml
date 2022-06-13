@@ -7,4 +7,8 @@ header:
     - '**/*.go'
     - '**/*.s'
 
+  paths-ignore:
+    - perf/cpu/calculator_mock.go
+    - perf/mem/mem_mock.go
+
   comment: on-failure

@@ -6,9 +6,13 @@
 ### 同机压测
 执行前请先确认满足环境要求
 ### Server
+```bash
 ./scripts/benchmark_server.sh
+```
 ### Client
+```bash
 ./scripts/benchmark_client.sh
+```
 ### Profiling
 由于默认压测参数会比较迅速完成一次压测，为了获得更长采集时间，可以手动在 ./scripts/env.sh 中调整压测参数 n 大小。
 #### Profiling Server
@@ -26,7 +30,7 @@ go tool pprof localhost:{port}/debug/pprof/{pprof_type}
 ```
 
 ### [wrk Benchmark](https://github.com/wg/wrk)
-You can run `wrk benchmark` via the following commands.
+你也可以用 wrk 作为发压端，参考下面的命令。
 ```bash
 ./scripts/benchmark_wrk.sh
 
@@ -40,7 +44,7 @@ python ./scripts/reports/render_images.py ${output_file}
 ```
 
 ### [ab Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html)
-You can run `wrk benchmark` via the following commands.
+你也可以用 ab 作为发压端，参考下面的命令。
 ```bash
 ./scripts/benchmark_ab.sh
 

@@ -33,7 +33,6 @@ type Timer struct {
 	sync.Once
 	now    int64
 	window time.Duration
-	notify []func(now time.Time)
 }
 
 // refresh time
