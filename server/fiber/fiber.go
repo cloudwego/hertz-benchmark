@@ -17,13 +17,9 @@
 package main
 
 import (
-	"time"
-	"unsafe"
-
 	"github.com/cloudwego/hertz-benchmark/perf"
 	"github.com/cloudwego/hertz-benchmark/runner"
-	"github.com/fasthttp/router"
-	"github.com/valyala/fasthttp"
+	"github.com/gofiber/fiber/v2"
 )
 
 const (
@@ -32,7 +28,7 @@ const (
 	actionQuery = "action"
 )
 
-var recorder = perf.NewRecorder("FastHttpTimeout@Server")
+var recorder = perf.NewRecorder("Fiber@Server")
 
 func main() {
 	// start pprof server
@@ -40,26 +36,16 @@ func main() {
 		perf.ServeMonitor(debugPort)
 	}()
 
-	r := router.New()
+	r := fiber.New()
 
-	r.POST("/", requestHandler)
+	r.Post("/", requestHandler)
 
-	s := &fasthttp.Server{
-		Handler:     r.Handler,
-		ReadTimeout: time.Second * 10,
-		IdleTimeout: time.Second * 10,
-	}
-
-	s.ListenAndServe(port)
+	r.Listen(port)
 }
 
-func requestHandler(ctx *fasthttp.RequestCtx) {
-	runner.ProcessRequest(recorder, b2s(ctx.QueryArgs().Peek(actionQuery)))
+func requestHandler(ctx *fiber.Ctx) error {
+	runner.ProcessRequest(recorder, ctx.Query(actionQuery))
 
-	ctx.SetContentType("text/plain; charset=utf8")
-	ctx.Response.SetBody(ctx.Request.Body())
-}
-
-func b2s(b []byte) string {
-	return *(*string)(unsafe.Pointer(&b))
+	ctx.Response().Header.SetContentType("text/plain; charset=utf8")
+	return ctx.Send(ctx.Request().Body())
 }

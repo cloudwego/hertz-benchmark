@@ -9,7 +9,7 @@ t=30
 body=(1024 2048 4096 8192 16384 32768 65536)
 concurrent=(100)
 header=(1024)
-repo=("hertz" "fasthttp" "gin" "fasthttp_timeout")
+repo=("hertz" "fasthttp" "gin" "fiber")
 ports=(8001 8002 8003 8004)
 serverIP="http://127.0.0.1"
 
