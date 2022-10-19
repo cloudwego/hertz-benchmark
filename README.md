@@ -14,7 +14,7 @@
 ./scripts/benchmark_client.sh
 ```
 ### Profiling
-由于默认压测参数会比较迅速完成一次压测，为了获得更长采集时间，可以手动在 ./scripts/env.sh 中调整压测参数 n 大小。
+由于默认压测参数会比较迅速完成一次压测，为了获得更长采集时间，可以手动在 ./scripts/benchmark_server.sh 中调整压测参数 n 大小。
 #### Profiling Server
 不同 server 的 port 映射参见相应脚本，如:
 ```shell
