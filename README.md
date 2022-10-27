@@ -68,9 +68,12 @@ python ./scripts/reports/render_images.py ${output_file}
 
   该压测数据是在调用端有充分机器资源压满服务端的情况下测试，更侧重于关注服务端性能。后续会提供调用端性能数据情况。
 ### 配置
-- CPU: Intel(R) Xeon(R) Gold 5118 CPU @ 2.30GHz
-    - 运行限定 server 4-CPUs，client 16-CPUS
-- OS：Debian 5.4.56.bsk.9-amd64 x86_64 GNU/Linux
-- Go: 1.16.5
+- CPU: AMD EPYC 7Y83 64-Core Processor 2.7GHz
+  - 运行限定 server 4-CPUs，client 16-CPUS
+- OS：Debian GNU/Linux 10 (buster)
+- Go 1.19
 ### 数据 (Echo，100 concurrency，1k Header）
-  ![Performance](images/performance.png)
+- 四个框架的横向比较
+![Performance](images/performance-4.png)
+- 三个框架（排除 gin 框架）时延比较
+![Performance](images/performance-3.png)
