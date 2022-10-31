@@ -17,7 +17,7 @@ def parse_data(file):
 
     y_qps = parse_y(lines=lines, idx=3)
     print(y_qps)
-    plot_data(title="QPS (higher is better)", xlabel=x_label, ylabel="qps", x_ticks=x_ticks, ys=y_qps)
+    plot_data(title="TPS (higher is better)", xlabel=x_label, ylabel="tps", x_ticks=x_ticks, ys=y_qps)
 
     y_p99 = parse_y(lines=lines, idx=4, times=1000)
     print(y_p99)
