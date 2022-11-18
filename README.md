@@ -75,5 +75,5 @@ python ./scripts/reports/render_images.py ${output_file}
 ### 数据 (Echo，100 concurrency，1k Header）
 - 四个框架的横向比较
 ![Performance](images/performance-4.png)
-- 三个框架（排除 gin 框架）时延比较
+- 三个框架的横向比较
 ![Performance](images/performance-3.png)
