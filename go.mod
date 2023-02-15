@@ -6,7 +6,7 @@ require (
 	github.com/cloudwego/hertz v0.3.1
 	github.com/cloudwego/netpoll v0.2.6
 	github.com/fasthttp/router v1.4.3
-	github.com/gin-gonic/gin v1.7.4
+	github.com/gin-gonic/gin v1.7.7
 	github.com/gofiber/fiber/v2 v2.38.1
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/montanaflynn/stats v0.6.6
