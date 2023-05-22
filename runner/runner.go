@@ -19,6 +19,8 @@ package runner
 import (
 	"sync"
 	"time"
+
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 )
 
 // 为了流量更均匀, 时间间隔设置为 10ms
@@ -78,5 +80,8 @@ func (r *Runner) Run(title string, onceFn RunOnce, size, concurrent int, total i
 	start := r.timer.Now()
 	r.benching(onceFn, concurrent, total)
 	stop := r.timer.Now()
-	r.counter.Report(title, stop-start, concurrent, total, bodySize, headerSize)
+	err := r.counter.Report(title, stop-start, concurrent, total, bodySize, headerSize)
+	if err != nil {
+		hlog.Error(err)
+	}
 }

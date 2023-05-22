@@ -21,6 +21,7 @@ import (
 
 	"github.com/cloudwego/hertz-benchmark/perf"
 	"github.com/cloudwego/hertz-benchmark/runner"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/fasthttp/router"
 	"github.com/valyala/fasthttp"
 )
@@ -36,7 +37,10 @@ var recorder = perf.NewRecorder("FastHttp@Server")
 func main() {
 	// start pprof server
 	go func() {
-		perf.ServeMonitor(debugPort)
+		err := perf.ServeMonitor(debugPort)
+		if err != nil {
+			hlog.Error(err)
+		}
 	}()
 
 	r := router.New()
@@ -47,7 +51,10 @@ func main() {
 		Handler: r.Handler,
 	}
 
-	s.ListenAndServe(port)
+	err := s.ListenAndServe(port)
+	if err != nil {
+		hlog.Error(err)
+	}
 }
 
 func requestHandler(ctx *fasthttp.RequestCtx) {

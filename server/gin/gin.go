@@ -21,6 +21,7 @@ import (
 
 	"github.com/cloudwego/hertz-benchmark/perf"
 	"github.com/cloudwego/hertz-benchmark/runner"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/gin-gonic/gin"
 )
 
@@ -35,7 +36,10 @@ var recorder = perf.NewRecorder("Gin@Server")
 func main() {
 	// start pprof server
 	go func() {
-		perf.ServeMonitor(debugPort)
+		err := perf.ServeMonitor(debugPort)
+		if err != nil {
+			hlog.Error(err)
+		}
 	}()
 
 	gin.SetMode(gin.ReleaseMode)
@@ -43,11 +47,17 @@ func main() {
 
 	r.POST("/", echoHandler)
 
-	r.Run(port)
+	err := r.Run(port)
+	if err != nil {
+		hlog.Error(err)
+	}
 }
 
 func echoHandler(c *gin.Context) {
 	runner.ProcessRequest(recorder, c.Query(actionQuery))
 	b, _ := ioutil.ReadAll(c.Request.Body)
-	c.Writer.Write(b)
+	_, err := c.Writer.Write(b)
+	if err != nil {
+		hlog.Error(err)
+	}
 }

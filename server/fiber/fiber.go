@@ -19,6 +19,7 @@ package main
 import (
 	"github.com/cloudwego/hertz-benchmark/perf"
 	"github.com/cloudwego/hertz-benchmark/runner"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -33,14 +34,20 @@ var recorder = perf.NewRecorder("Fiber@Server")
 func main() {
 	// start pprof server
 	go func() {
-		perf.ServeMonitor(debugPort)
+		err := perf.ServeMonitor(debugPort)
+		if err != nil {
+			hlog.Error(err)
+		}
 	}()
 
 	r := fiber.New()
 
 	r.Post("/", requestHandler)
 
-	r.Listen(port)
+	err := r.Listen(port)
+	if err != nil {
+		hlog.Error(err)
+	}
 }
 
 func requestHandler(ctx *fiber.Ctx) error {
