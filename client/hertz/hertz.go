@@ -36,7 +36,7 @@ type Client struct {
 }
 
 func NewHertzClient(opt *runner.Options) runner.Client {
-	netpoll.SetNumLoops(2)
+	_ = netpoll.SetNumLoops(2)
 	client, err := client.NewClient(client.WithMaxConnsPerHost(1000))
 	if err != nil {
 		panic(err)

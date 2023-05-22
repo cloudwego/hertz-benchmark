@@ -26,6 +26,7 @@ import (
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/server"
 	"github.com/cloudwego/hertz/pkg/common/config"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
 	"github.com/cloudwego/netpoll"
 )
 
@@ -40,10 +41,13 @@ var recorder = perf.NewRecorder("Hertz@Server")
 func main() {
 	// start pprof server
 	go func() {
-		perf.ServeMonitor(debugPort)
+		err := perf.ServeMonitor(debugPort)
+		if err != nil {
+			hlog.Error(err)
+		}
 	}()
 
-	netpoll.SetNumLoops(2)
+	_ = netpoll.SetNumLoops(2)
 	opts := []config.Option{
 		server.WithHostPorts(port),
 		server.WithIdleTimeout(time.Second * 10),

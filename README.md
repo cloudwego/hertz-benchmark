@@ -1,10 +1,12 @@
 # Hertz-Benchmark
 
-调研其他项目的 benchmark 以及 HTTP 使用场景后，我们觉得 Echo 场景能够反映真实的使用场景。本项目提供若干 HTTP 框架在 Echo 场景下的性能记录。
+English | [中文](README_cn.md)
 
-## 使用说明
-### 同机压测
-执行前请先确认满足环境要求
+After researching other projects' benchmarks and HTTP usage scenarios, we believe that the Echo scenario can reflect real usage scenarios. This project provides performance records for several HTTP frameworks in the Echo scenario.
+
+## Instructions
+### Local testing
+Please make sure to meet the environment requirements before executing.
 ### Server
 ```bash
 ./scripts/benchmark_server.sh
@@ -14,9 +16,9 @@
 ./scripts/benchmark_client.sh
 ```
 ### Profiling
-由于默认压测参数会比较迅速完成一次压测，为了获得更长采集时间，可以手动在 ./scripts/benchmark_server.sh 中调整压测参数 n 大小。
+Since the default test parameters will complete a test quickly, to get a longer data collection time, you can manually adjust the test parameter `n` size in `./scripts/benchmark_server.sh`.
 #### Profiling Server
-不同 server 的 port 映射参见相应脚本，如:
+Refer to the corresponding script for the port mapping of different servers, e.g.:
 ```shell
 cat ./scripts/benchmark_pb.sh
 
@@ -24,13 +26,13 @@ cat ./scripts/benchmark_pb.sh
 repo=("hertz" "fasthttp" "gin" "fasthttp_timeout")
 ports=(8000 8001 8002 8003 8004)
 ```
-获取到对应 server 端口号后，执行：
+After obtaining the corresponding server port, execute:
 ```shell
 go tool pprof localhost:{port}/debug/pprof/{pprof_type}
 ```
 
 ### [wrk Benchmark](https://github.com/wg/wrk)
-你也可以用 wrk 作为发压端，参考下面的命令。
+You can also use wrk as the load generator, refer to the following command.
 ```bash
 ./scripts/benchmark_wrk.sh
 
@@ -44,7 +46,7 @@ python ./scripts/reports/render_images.py ${output_file}
 ```
 
 ### [ab Benchmark](https://httpd.apache.org/docs/2.4/programs/ab.html)
-你也可以用 ab 作为发压端，参考下面的命令。
+You can also use ab as the load generator, refer to the following command.
 ```bash
 ./scripts/benchmark_ab.sh
 
@@ -58,22 +60,22 @@ python ./scripts/ab/parse_data.py ${input_log_file} ${input_latency_file} ${outp
 python ./scripts/reports/render_images.py ${output_file}
 ```
 
-## 环境要求
+## Environment Requirements
 - OS: Linux
-    - 默认依赖了命令 taskset, 限定 client 和 server 运行的 CPU; 如在其他系统执行, 请修改脚本。
-- CPU: 推荐配置 >=20核, 最低要求 >=4核
-    - 压测脚本默认需要 20核 CPU, 具体在脚本的 taskset -c ... 部分, 可以修改或删除。
-## 参考数据
-  相关说明:
+  - The script depends on the `taskset` command to limit the CPUs used by the client and server. If executing on other systems, please modify the script accordingly.
+- CPU: Recommended configuration is >=20 cores, minimum requirement is >=4 cores
+  - The default test script requires a 20-core CPU, which can be modified or removed in the `taskset -c ...` part of the script.
+## Reference Data
+Remarks:
 
-  该压测数据是在调用端有充分机器资源压满服务端的情况下测试，更侧重于关注服务端性能。后续会提供调用端性能数据情况。
-### 配置
+The test data is obtained by filling the server with adequate machine resources, and therefore focuses more on server performance. Caller performance data will be provided in the future.
+### Configuration
 - CPU: AMD EPYC 7Y83 64-Core Processor 2.7GHz
-  - 运行限定 server 4-CPUs，client 16-CPUS
-- OS：Debian GNU/Linux 10 (buster)
+  - `server` limited to 4-CPUs, `client` limited to 16-CPUS
+- OS: Debian GNU/Linux 10 (buster)
 - Go 1.19
-### 数据 (Echo，100 concurrency，1k Header）
-- 四个框架的横向比较
-![Performance](images/performance-4.png)
-- 三个框架的横向比较
-![Performance](images/performance-3.png)
+### Data (Echo, 100 concurrency, 1k Header)
+- Comparison of four frameworks
+  ![Performance](images/performance-4.png)
+- Comparison of three frameworks
+  ![Performance](images/performance-3.png)
