@@ -19,3 +19,15 @@ Reference framework
 
 Note:
 * `fiber v3` is not yet released, so the benchmark for it can not be executed. 
+
+## Result
+
+| scenario                      | performance                             |
+|-------------------------------|-----------------------------------------|
+| less query & less field       | `hertz ~= fiber v3 > gin > go-tagexpr`  |
+| more query & less field       | `hertz ~= fiber v3 > gin > go-tagexpr`  |
+| more query & more field       | `hertz ~= fiber v3 > gin > go-tagexpr`  |
+| less query & less slice field | `gin > hertz > fiber v3 > go-tagexpr`   |
+| more query & less slice field | `gin > hertz > fiber v3 > go-tagexpr`   |
+| more query & more slice field | `gin > hertz > go-tagexpr > fiber v3`   |
+| less query & more slice field | `gin ~= hertz ~= go-tagexpr > fiber v3` |
