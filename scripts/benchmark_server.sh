@@ -6,8 +6,8 @@ n=3000000
 body=(1024 2048 4096 8192 16384 32768 65536)
 concurrent=(100)
 header=(1024)
-repo=("hertz" "fasthttp" "gin" "fiber")
-ports=(8001 8002 8003 8004)
+repo=("hertz" "fasthttp" "gin" "fiber" "hex")
+ports=(8001 8002 8003 8004 8005)
 serverIP="http://127.0.0.1"
 
 . ./scripts/build_all.sh
